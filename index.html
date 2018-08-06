@@ -10,12 +10,12 @@
 </head>
 
 <body>
-    <section class="packages">
+    <section class="packages featured">
         <nav class="nav-packages">
             <div class="container">
                 <div class="grid">
-                    <a href="#" class="selected">Atacado</a>
-                    <a href="#">Indústria</a>
+                    <a href="#atacado" class="selected">Atacado</a>
+                    <a href="#industria">Indústria</a>
                     <a href="#">Serviços</a>
                     <a href="#">Transportadora</a>
                     <a href="#">Comércio</a>
@@ -23,9 +23,19 @@
                 </div>
             </div>
         </nav>
-        <div class="package">
+
+        <div class="packages-select">
+            <select class="packages-select">
+                <option value="#atacado">Atacado</option>
+                <option value="#industria">Indústria</option>
+            </select>
+        </div>
+
+        <div class="package" id="atacado">
             <div class="overlay-package">
                 <div class="container">
+                    <h2>Atacado</h2>
+                    <h3>Administre o seu atacado com qualidade</h3>
                     <div class="package-value">
                         <div class="left">
                             <span class="type">Mensal</span>
@@ -36,14 +46,15 @@
                             <span class="value">R$ <i>251,99</i></span>
                         </div>
                     </div>
-                    <h2>Atacado</h2>
-                    <h3>Administre o seu atacado com qualidade</h3>
                     <p>O Totalerp é um excelente auxiliar para Micro, Pequenos e Médios atacadistas preocupados em realizar vendas para seus clientes, controlando diversas tabelas de negociação bem como a comissão de seus vendedores. O processo de vendas e faturamento é simplificado. Integrado com boletos bancários, nota fiscal eletrônica de produto( NF-e) e ao consumidor (NFC-e).</p>
                     <h4>Módulos disponíveis no pacote:</h4>
                     <ul class="module-list">
                         <li>
                             <img src="assets/img/boleto.svg" alt="Boleto Registrado">
                             <h5>Boleto Registrado</h5>
+                            <div class="tooltip">
+                                Pariatur ullamco tempor reprehenderit eu veniam officia officia ipsum sint. Id nisi labore labore occaecat exercitation.
+                            </div>
                         </li>
                         <li>
                             <img src="assets/img/controle.svg" alt="Boleto Registrado">
@@ -114,6 +125,8 @@
             </div>
         </div>
     </section>
+
+    <script src="assets/js/bundle.min.js"></script>
 </body>
 
 </html>

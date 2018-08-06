@@ -1,9 +1,35 @@
 .packages
-    padding 0 0 70px
     .nav-packages
         background #242424
         z-index: 1
         position relative
+        +below($bp.md)
+            display none
+    .packages-select
+        position relative
+        +above($bp.md)
+            display none
+        &::after
+            content: '\f107'
+            font-family 'FontAwesome'
+            color white
+            font-size: 25px
+            position absolute
+            top 50%
+            right 20px
+            transform translateY(-50%)
+        select
+            width 100%
+            height 40px
+            background #242424
+            appearance none
+            -moz-appearance: none
+            -webkit-appearance: none
+            border: none
+            padding 0 20px
+            color white
+            font-size: 18px
+            outline 0
     .grid
         display flex
         a
@@ -12,8 +38,9 @@
             font-size: 16px
             line-height 40px
             color white
-            transition: .2s
+            transition: all .2s
             position relative
+            outline 0
             &:not(:last-child)
                 &::before
                     content: ''
@@ -27,24 +54,33 @@
             &:hover, &.selected
                 background: #29c9ff
                 &::after
-                    content: ''
-                    width: 0
-                    height: 0
-                    border-style: solid
-                    border-width: 12px 10px 0 10px
-                    border-color: #29c9ff transparent transparent transparent
-                    position absolute
-                    top 100%
-                    left: 50%
-                    transform translateX(-50%)
+                    visibility visible
+                    opacity 1
+            &::after
+                content: ''
+                width: 0
+                height: 0
+                border-style: solid
+                border-width: 12px 10px 0 10px
+                border-color: #29c9ff transparent transparent transparent
+                position absolute
+                top 100%
+                left: 50%
+                transform translateX(-50%)
+                visibility hidden
+                opacity 0
+                transform all .2s
     .package
         z-index: 0
         background url(http://totalerp.com.br/testes/wp-content/themes/totalerp/img/sky-1.jpg) center no-repeat
         background-size: cover
         position relative
+        display none
+        &#atacado
+            display block
         .overlay-package
             padding 40px 0
-            background: rgba(0,0,0,0.2)
+            background: rgba(0,0,0,0.5)
             position relative
         .container
             position relative
@@ -60,9 +96,12 @@
             background #242424
             border-radius: 25px
             display flex
-            position absolute
             top 0
-            right: 0
+            right: 20px
+            +above($bp.md)
+                position absolute
+            +below($bp.md)
+                margin-bottom 20px
             > div
                 display flex
                 flex-direction column
@@ -118,12 +157,49 @@
             display flex
             align-items: center
             margin-bottom 20px
+            position relative
+            cursor pointer
+            &:hover
+                .tooltip
+                    visibility visible
+                    opacity 1
+            +below($bp.md)
+                width 50%
+            +below($bp.xs)
+                width 100%
             h5
                 font-size: 18px
                 color white
                 font-weight: 400
             img
                 margin-right 15px
+            .tooltip
+                width 280px
+                padding 10px
+                background #242424
+                border-radius: 10px
+                color white
+                display block
+                font-size: 14px
+                position absolute
+                bottom 130%
+                left 0%
+                line-height 1.5
+                visibility hidden
+                opacity 0
+                transition: .2s
+                &::after
+                    content: ''
+                    width: 0
+                    height: 0
+                    border-style: solid
+                    border-width: 6px 5px 0 5px
+                    border-color: #242424 transparent transparent transparent
+                    position absolute
+                    top 100%
+                    left 50%
+                    transform translateX(-50%)
+
     .buttons
         margin 30px auto 0
         display flex

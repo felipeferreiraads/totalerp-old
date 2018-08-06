@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config>
+    <environment>production</environment><!-- sandbox or production -->
+    <credentials>
+        <account>
+            <email>financeiro@totalerp.com.br</email>
+            <production>
+                <token>CD463AF81B3A40CA95B0DD807A8CB9A0</token>
+            </production>
+            <sandbox>
+                <token>7FCD083DC25C4F7C9DCBF9A877E57DF1</token>
+            </sandbox>
+        </account>
+        <application>
+            <production>
+                <appId>your_production_application_id</appId>
+                <appKey>your_production_application_key</appKey>
+            </production>
+            <sandbox>
+                <appId>your_sandbox_application_id</appId>
+                <appKey>your_sandbox_application_key</appKey>
+            </sandbox>
+        </application>
+    </credentials>
+    <charset>UTF-8</charset>
+    <log>
+        <active>false</active>
+        <location>/</location>
+    </log>
+</config>
