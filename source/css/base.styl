@@ -1,0 +1,41 @@
+// =============================================================================
+// Base
+// =============================================================================
+
+*,
+*::before,
+*::after
+  box-sizing: border-box
+
+html
+  font-size 62.5%
+
+body
+  font-family: $font-family.primary
+  font-size: 100%
+  background-color: #fff
+
+a
+  text-decoration: none
+  color: inherit
+
+p
+  line-height: 1.5
+
+.container
+  max-width: $container.width
+  padding: 0 $container.padding
+  margin-left: auto
+  margin-right: auto
+
+p, h1, h2, h3, h4, h5, h6
+  margin: 0
+
+figure
+  margin: 0
+
+::-webkit-input-placeholder
+:-moz-placeholder
+::-moz-placeholder
+:-ms-input-placeholder
+  opacity: 1 !important

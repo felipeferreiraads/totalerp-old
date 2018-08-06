@@ -1,0 +1,74 @@
+{
+  "name": "boilerplate",
+  "private": true,
+  "scripts": {
+    "js": "webpack",
+    "js:watch": "webpack --watch",
+    "js:prod": "webpack",
+    "css": "stylus -m source/css/index.styl --include-css -I node_modules -o assets/css/style.min.css -u rupture -u poststylus --with \"['lost']\"",
+    "css:watch": "stylus -w source/css/index.styl --include-css -I node_modules -o assets/css/style.min.css -u rupture -u poststylus --with \"['lost']\"",
+    "css:autoprefixer": "npm run css -- -u autoprefixer-stylus --with \"{browsers: ['> 1%']}\"",
+    "css:prod": "npm run css:autoprefixer -- -u csso-stylus",
+    "img": "copy-cli \"source/img/**/*\" \"assets/img\"",
+    "img:prod": "imagemin \"source/img/**/*\" --out-dir=assets/img",
+    "styleguide": "styleguide-plus \"source/css/**/*.styl\" -o assets/styleguide",
+    "php": "php -S localhost:8000",
+    "browsersync": "browser-sync start --proxy \"http://localhost:8000\" -f=\"assets,!**/*.map\" --no-ghost-mode --reload-delay 100 --startPath \"/\"",
+    "serve": "parallelshell \"npm run php\" \"npm run browsersync\"",
+    "watch": "parallelshell \"npm run js:watch\" \"npm-watch\"",
+    "dev": "parallelshell \"npm run serve\" \"npm run watch\"",
+    "build": "parallelshell \"npm run js:prod\" \"npm run css:prod\" \"npm run img:prod\" && echo \"MANDA BALA NO DEPLOY!\""
+  },
+  "watch": {
+    "css": {
+      "patterns": [
+        "source/css"
+      ],
+      "extensions": "styl"
+    },
+    "img": {
+      "patterns": [
+        "source/img"
+      ],
+      "extensions": "jpg,jpeg,png,svg,gif"
+    }
+  },
+  "standard": {
+    "globals": [
+      "jQuery",
+      "$"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer-stylus": "^0.10.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.3",
+    "babel-preset-env": "^1.6.1",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.16.0",
+    "copy": "github:gsantiago/copy",
+    "csso-stylus": "0.0.3",
+    "imagemin-cli": "^3.0.0",
+    "lost": "^7.1.0",
+    "lost-stylus": "^0.1.2",
+    "npm-watch": "^0.3.0",
+    "parallelshell": "^3.0.2",
+    "poststylus": "^0.2.3",
+    "rupture": "^0.6.1",
+    "simplifyify": "^3.2.1",
+    "snazzy": "^5.0.0",
+    "standard": "^8.1.0",
+    "stylus": "^0.54.5",
+    "webpack": "^3.11.0"
+  },
+  "dependencies": {
+    "extract-data-options": "0.0.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "jquery-validation": "^1.16.0",
+    "normalize.css": "^4.2.0",
+    "owl.carousel": "^2.3.2",
+    "shufflejs": "^5.1.2",
+    "sweetalert2": "^6.5.6"
+  }
+}

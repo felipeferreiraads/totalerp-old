@@ -1,0 +1,155 @@
+.packages
+    padding 0 0 70px
+    .nav-packages
+        background #242424
+        z-index: 1
+        position relative
+    .grid
+        display flex
+        a
+            flex 1
+            text-align center
+            font-size: 16px
+            line-height 40px
+            color white
+            transition: .2s
+            position relative
+            &:not(:last-child)
+                &::before
+                    content: ''
+                    width 1px
+                    height 70%
+                    background: white
+                    position absolute
+                    right 0
+                    top 50%
+                    transform translateY(-50%)
+            &:hover, &.selected
+                background: #29c9ff
+                &::after
+                    content: ''
+                    width: 0
+                    height: 0
+                    border-style: solid
+                    border-width: 12px 10px 0 10px
+                    border-color: #29c9ff transparent transparent transparent
+                    position absolute
+                    top 100%
+                    left: 50%
+                    transform translateX(-50%)
+    .package
+        z-index: 0
+        background url(http://totalerp.com.br/testes/wp-content/themes/totalerp/img/sky-1.jpg) center no-repeat
+        background-size: cover
+        position relative
+        .overlay-package
+            padding 40px 0
+            background: rgba(0,0,0,0.2)
+            position relative
+        .container
+            position relative
+        .button
+            padding 0 40px
+            line-height 50px
+            background #242424
+            color white
+            font-size: 20px
+            border-radius: 25px
+        .package-value
+            padding 10px 40px
+            background #242424
+            border-radius: 25px
+            display flex
+            position absolute
+            top 0
+            right: 0
+            > div
+                display flex
+                flex-direction column
+            .type
+                font-size: 12px
+                color white
+                margin-bottom 5px
+            .value
+                font-size: 20px
+                color white
+                i
+                    font-style: normal
+                    color: #29c9ff
+            .left
+                padding-right 20px
+                position relative
+                &::after
+                    content: ''
+                    width 1px
+                    height 80%
+                    background white
+                    position absolute
+                    right 0
+                    top 50%
+                    transform translateY(-50%)
+            .right
+                padding-left 20px
+
+        h2, h3
+            font-size: 35px
+            font-weight: 500
+            color #FFF
+            margin-bottom: 20px
+        h3
+            font-size: 20px
+            color #FFF
+        p
+            font-size: 18px
+            color #FFF
+            line-height 2
+    h4
+        font-size: 25px
+        color white
+        font-weight: 500
+        margin 30px 0 25px
+    .module-list
+        list-style-type: none
+        display flex
+        flex-wrap: wrap
+        padding 0
+        li
+            width 33.33%
+            display flex
+            align-items: center
+            margin-bottom 20px
+            h5
+                font-size: 18px
+                color white
+                font-weight: 400
+            img
+                margin-right 15px
+    .buttons
+        margin 30px auto 0
+        display flex
+        justify-content: center
+        a
+            width 160px
+            line-height 60px
+            text-align center
+            display block
+            font-size: 18px
+            color white
+            background: #242424
+            transition .2s
+            &:hover
+                background: #29c9ff
+            &:first-child
+                border-radius: 24px 0 0 24px
+                position relative
+                &::after
+                    content: ''
+                    width 1px
+                    height 50%
+                    background white
+                    position absolute
+                    right 0
+                    top 50%
+                    transform translateY(-50%)
+            &:last-child
+                border-radius: 0 24px 24px 0
