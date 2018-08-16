@@ -5,9 +5,8 @@ function hideMenu(menu, classe){
 
 $(document).ready(function() {
 
-$('.has-submenu').on('click', function(e) {
+$('.has-submenu').on('click', function() {
     e.preventDefault();
-    console.log('click');
     $(this).parent().find('.submenu').toggle();
 });
 

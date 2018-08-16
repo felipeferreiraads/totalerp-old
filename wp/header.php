@@ -22,20 +22,6 @@
     <link rel="shortcut icon" href="<?php bloginfo('template_directory'); ?>/img/favicon.ico" type="image/x-icon">   
     <?php wp_head(); ?>
     <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/packages.css">
-
-
-
-<!--Start of Zendesk Chat Script-->
-<script type="text/javascript">
-window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-$.src="https://v2.zopim.com/?12JExVxivwv5LUpstETTVHxVXxfhum9f";z.t=+new Date;$.
-type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
-</script>
-<!--End of Zendesk Chat Script-->
-
-
 </head>
 
 <body <?php body_class( $class ); ?>>
@@ -43,6 +29,9 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 <!-- RD Station -->
 <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/b9a75cd6-97ec-4a0b-be36-9b30a45ac6d4-loader.js"></script>
 
-<?php get_template_part('main', 'menu'); ?>
+<?php
+    get_template_part('templates/header-mobile');
+    get_template_part('templates/header-desktop');
+?>
 
 <div class="main">

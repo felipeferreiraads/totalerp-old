@@ -14,13 +14,13 @@ get_header();
 				<?php the_content(); ?>
 			</article>
 		</section>
-		<section class="container tw-py-12">
+		<section class="container">
 			<nav class="tw-block md:tw-flex text-center plans-nav">
 				<a class="tw-w-full md:tw-w-auto tw-mb-3 md:tw-mb-0" href="javascript://" data-tab-toggle="monthly">Plano Mensal</a>
 				<a class="tw-w-full md:tw-w-auto tw-mb-3 md:tw-mb-0" href="javascript://"  data-tab-toggle="monthly_fidelity">Plano Mensal Fidadelidade</a>
-				<a class="tw-w-full md:tw-w-auto tw-mb-3 md:tw-mb-0" href="javascript://"  data-tab-toggle="yearly">Plano Anual</a>
 			</nav>
 			
+			<div class="scroll-on-mobile">
 			<?php foreach (['monthly', 'monthly_fidelity', 'yearly'] as $index => $type): ?>
 				<div style="<?php echo $index === 0 ? '' : 'display:none' ?>" data-tab-item="<?php echo $type ?>">
 					<table class="plans tw-mb-12">
@@ -109,20 +109,22 @@ get_header();
 
 
 										<?php foreach ( get_custom_post_type('plan', '-1') as $plan): ?>
-											<?php foreach (get_field('plans', $subitem) as $item): ?>
-												<?php if ($item['plan']->ID == $plan->ID): ?>
-													<td class="<?php echo get_field('is_featured', $item['plan']->ID) ? 'is-featured' : '' ?>">
-														<?php if ($item['value'] == 'NAO'): ?>
-															<i class="fa fa-times"></i>
-														<?php elseif($item['value'] == 'SIM'): ?>
-															<i class="fa fa-check"></i>
-														<?php else: ?>
-															<?php echo $item['value'] ?>
-														<?php endif ?>
-													</td>
-												<?php endif ?>
-
-											<?php endforeach ?>
+											<?php $items = get_field('plans', $subitem);
+											if($items): 
+												foreach ($items as $item): ?>
+													<?php if ($item['plan']->ID == $plan->ID): ?>
+														<td class="<?php echo get_field('is_featured', $item['plan']->ID) ? 'is-featured' : '' ?>">
+															<?php if ($item['value'] == 'NAO'): ?>
+																<i class="fa fa-times"></i>
+															<?php elseif($item['value'] == 'SIM'): ?>
+																<i class="fa fa-check"></i>
+															<?php else: ?>
+																<?php echo $item['value'] ?>
+															<?php endif ?>
+														</td>
+													<?php endif ?>
+												<?php endforeach ?>
+											<?php endif ?>
 										<?php endforeach ?>
 
 
@@ -149,7 +151,7 @@ get_header();
 				</div>
 
 			<?php endforeach ?>
-
+			</div>
 		</section>
 	<?php endwhile; endif; ?>
 	<?php 

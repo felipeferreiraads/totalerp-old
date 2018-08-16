@@ -3113,7 +3113,6 @@ footer .contact .container:after {
         min-height: 450px;
     }
     .btn {
-        width: auto!important;
         max-width:220px;
         padding:0 20px;
         height:60px;
@@ -3282,4 +3281,8 @@ footer .contact .container:after {
     height: 35px;
     width: auto;
 
+}
+
+.submenu {
+    display: none;
 }

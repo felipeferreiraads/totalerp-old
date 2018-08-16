@@ -18,14 +18,16 @@
             </nav>
         </div>
 
-        <div class="packages-select">
-            <select>
-                <?php
-                    foreach($packages as $k => $p):
-                        echo '<option value="#'.$p->slug.'">'.$p->name.'</option>';
-                    endforeach;
-                ?>
-            </select>
+        <div class="container">
+            <div class="packages-select">
+                <select>
+                    <?php
+                        foreach($packages as $k => $p):
+                            echo '<option value="#'.$p->slug.'">'.$p->name.'</option>';
+                        endforeach;
+                    ?>
+                </select>
+            </div>
         </div>
 
         <?php foreach($packages as $k => $p): ?>
@@ -66,19 +68,20 @@
                                 <img src="<?php echo get_field('icone')['url'] ?>" alt="<?php echo get_the_title(); ?>">
                                 <?php the_title('<h5>', '</h5>'); ?>
                                 <div class="tooltip">
-                                    Pariatur ullamco tempor reprehenderit eu veniam officia officia ipsum sint. Id nisi labore labore occaecat exercitation.
+                                    <?php the_field('tooltip_home'); ?>
                                 </div>
                             </li>
                         <?php endwhile; ?>
                         </ul>
                     </div>
                     <div class="image">
-                        <img src="<?php echo get_template_directory_uri();?>/img/macbook.jpg" alt="Totalerp">
+                        <img src="<?php the_field('imagem_home', 'pacotes_'.$p->term_id);?>" alt="Totalerp">
                     </div>
                 </div>
                 <form id="ctc" action="<?php echo site_url('/carrinho/add');?>" method="post">
                     <input type="hidden" name="produto" value="<?php echo $p->term_id;?>">
-                    <input name="radio-stacked" value="1" class="custom-control-input" type="hidden">
+                    <input name="t" value="1" type="hidden">
+                    <input name="radio-stacked" value="1" type="hidden">
                     <div class="buttons">
                         <button type="submit" class="buy">Quero contratar</button>
                         <a href="<?php echo site_url('/pacotes/'.$p->slug);?>">Saiba mais</a>

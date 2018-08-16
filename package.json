@@ -5,8 +5,8 @@
     "js": "webpack",
     "js:watch": "webpack --watch",
     "js:prod": "webpack",
-    "css": "stylus -m source/css/index.styl --include-css -I node_modules -o assets/css/style.min.css -u rupture -u poststylus --with \"['lost']\"",
-    "css:watch": "stylus -w source/css/index.styl --include-css -I node_modules -o assets/css/style.min.css -u rupture -u poststylus --with \"['lost']\"",
+    "css": "stylus -m source/css/index.styl --include-css -I node_modules -o assets/css/packages.css -u rupture -u poststylus --with \"['lost']\"",
+    "css:watch": "stylus -w source/css/index.styl --include-css -I node_modules -o assets/css/packages.css -u rupture -u poststylus --with \"['lost']\"",
     "css:autoprefixer": "npm run css -- -u autoprefixer-stylus --with \"{browsers: ['> 1%']}\"",
     "css:prod": "npm run css:autoprefixer -- -u csso-stylus",
     "img": "copy-cli \"source/img/**/*\" \"assets/img\"",
@@ -25,12 +25,6 @@
         "source/css"
       ],
       "extensions": "styl"
-    },
-    "img": {
-      "patterns": [
-        "source/img"
-      ],
-      "extensions": "jpg,jpeg,png,svg,gif"
     }
   },
   "standard": {

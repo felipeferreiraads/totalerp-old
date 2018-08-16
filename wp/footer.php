@@ -56,7 +56,7 @@ $address = explode( "," , $map['address']);
 
 </footer>
 <div style="display: none" data-degustation-modal  class="tw-fixed contato tw-pin-t tw-pin-l tw-w-full tw-h-full tw-bg-black-30 tw-z-50  tw-items-center tw-justify-center">
-    <div class="tw-bg-white tw-w-1/3 tw-px-4 tw-py-6 tw-relative">
+    <div class="tw-bg-white tw-px-4 tw-py-6 tw-relative">
         <a href="javascript://" data-close-modal class="tw-text-white tw-uppercase tw-font-bold tw-text-14 tw-absolute tw-pin-r tw-pin-t tw--mt-6">Fechar</a>
         <?php echo do_shortcode('[contact-form-7 id="3701" title="Experimente - Modal"]') ?>
     </div>
