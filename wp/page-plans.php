@@ -3,7 +3,7 @@ get_header();
 /** Template Name: Planos */
 ?>
 <div class="page">
-	<?php if(have_posts()): while(have_posts()): the_post();  ?> 
+	<?php if(have_posts()): while(have_posts()): the_post(); ?> 
 
 		<section class="banners min clouds">
 
@@ -27,7 +27,7 @@ get_header();
 					<thead>
 						<tr>
 							<td class="plan-header is-empty"></td>
-							<?php foreach (get_custom_post_type('plan', '-1') as $plan): ?>
+							<?php foreach (get_custom_post_type('plan', '-1') as $plan): $terms = wp_get_post_terms( $plan->ID, 'pacotes' ); ?>
 								<?php $group = get_field($type, $plan->ID) ?>
 								<td class="plan-header <?php echo get_field('is_featured', $plan->ID) ? 'is-featured' : '' ?>">
 									<div class="plan-header-holder">
@@ -54,9 +54,13 @@ get_header();
 											<strong><?php echo  $group['plan_third_line'] ?></strong>
 											<?php endif ?>
 										</span>
-										<a class="plan-contract" href="#">Contratar</a>
-										<a href="#" class="plan-more">Saiba mais</a>
-
+										<form id="ctc" action="<?php echo site_url('/carrinho/add');?>" method="post">
+											<input type="hidden" name="produto" value="<?php echo $terms[0]->term_id;?>">
+											<input name="t" value="1" type="hidden">
+											<input name="radio-stacked" value="1" type="hidden">
+											<button class="plan-contract">Contratar</button>
+											<a href="<?php echo site_url('/pacotes/' . $plan->post_name . '/');?>" class="plan-more">Saiba mais</a>
+										</form>
 									</div>
 								</td>
 							<?php endforeach ?>
@@ -141,8 +145,13 @@ get_header();
 							<td class="plan-footer is-empty"></td>
 							<?php foreach (get_custom_post_type('plan', '-1') as $plan): ?>
 								<td class="plan-footer <?php echo get_field('is_featured', $plan->ID) ? 'is-featured' : '' ?>">
-									<a href="" class="plan-contract">Contratar</a>
-									<a href="" class="plan-more">Saiba Mais</a>
+									<form id="ctc" action="<?php echo site_url('/carrinho/add');?>" method="post">
+										<input type="hidden" name="produto" value="<?php echo $terms[0]->term_id;?>">
+										<input name="t" value="1" type="hidden">
+										<input name="radio-stacked" value="1" type="hidden">
+										<button class="plan-contract">Contratar</button>
+										<a href="<?php echo site_url('/pacotes/' . $plan->post_name . '/');?>" class="plan-more">Saiba mais</a>
+									</form>
 								</td>
 							<?php endforeach ?>
 						</tr>

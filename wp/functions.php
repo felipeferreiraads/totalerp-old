@@ -365,7 +365,7 @@ function wpmc_register_taxonomies()
 {
 
     // register taxonomy called 'Pacotes'
-    register_taxonomy('pacotes', 'produtos',
+    register_taxonomy('pacotes', ['produtos', 'plan'],
         array(
             'labels'            => array(
                 'name'          => 'Pacotes',
