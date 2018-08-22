@@ -54,12 +54,12 @@ get_header();
 											<strong><?php echo  $group['plan_third_line'] ?></strong>
 											<?php endif ?>
 										</span>
-										<form id="ctc" action="<?php echo site_url('/carrinho/add');?>" method="post">
+										<form id="ctc" action="<?php echo home_url('/carrinho/add');?>" method="post">
 											<input type="hidden" name="produto" value="<?php echo $terms[0]->term_id;?>">
 											<input name="t" value="1" type="hidden">
 											<input name="radio-stacked" value="1" type="hidden">
 											<button class="plan-contract">Contratar</button>
-											<a href="<?php echo site_url('/pacotes/' . $plan->post_name . '/');?>" class="plan-more">Saiba mais</a>
+											<a href="<?php echo home_url('/pacotes/' . $plan->post_name . '/');?>" class="plan-more">Saiba mais</a>
 										</form>
 									</div>
 								</td>
@@ -145,12 +145,12 @@ get_header();
 							<td class="plan-footer is-empty"></td>
 							<?php foreach (get_custom_post_type('plan', '-1') as $plan): ?>
 								<td class="plan-footer <?php echo get_field('is_featured', $plan->ID) ? 'is-featured' : '' ?>">
-									<form id="ctc" action="<?php echo site_url('/carrinho/add');?>" method="post">
+									<form id="ctc" action="<?php echo home_url('/carrinho/add');?>" method="post">
 										<input type="hidden" name="produto" value="<?php echo $terms[0]->term_id;?>">
 										<input name="t" value="1" type="hidden">
 										<input name="radio-stacked" value="1" type="hidden">
 										<button class="plan-contract">Contratar</button>
-										<a href="<?php echo site_url('/pacotes/' . $plan->post_name . '/');?>" class="plan-more">Saiba mais</a>
+										<a href="<?php echo home_url('/pacotes/' . $plan->post_name . '/');?>" class="plan-more">Saiba mais</a>
 									</form>
 								</td>
 							<?php endforeach ?>

@@ -77,33 +77,41 @@ $image = get_field('imagem_descricao', 'pacotes_' . $term_id);
                     <div class="col-lg-4">
                         <div class="row">
                             <div class="col-12">
-                        <?php while(have_posts()): the_post();
-                            $i++;
-                            $class = ($i == 1) ? 'active' : '';
-                        ?>
-                            
-                                <?php $icon = get_field('icone'); ?>
-                                <li class="card <?php echo $class; ?>" data-title="#<?php echo $post->post_name; ?>">
-                                    <img src="<?php echo $icon['url'] ?>" class="style-svg" />
-                                    <h4><?php the_title(); ?></h4>
-                                </li>
-                            
-                        <?php endwhile; ?>
+                                <?php 
+                                while(have_posts()): the_post();
+                                    if($post->post_type != 'plan'):
+                                        $i++;
+                                        $class = ($i == 1) ? 'active' : '';
+                                ?>
+                                    
+                                        <?php $icon = get_field('icone'); ?>
+                                        <li class="card <?php echo $class; ?>" data-title="#<?php echo $post->post_name; ?>">
+                                            <img src="<?php echo $icon['url'] ?>" class="style-svg" />
+                                            <h4><?php the_title(); ?></h4>
+                                        </li>
+                                    
+                                <?php 
+                                    endif;
+                                endwhile; ?>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-8">
-                    <?php while(have_posts()): the_post(); 
-                        $j++;
-                        $active = ($j == 1) ? 'active' : '';
-                    ?>
-                        <article class="white <?php echo $active; ?>" id="<?php echo $post->post_name; ?>">
-                            <h1 class="post-title"><?php the_title(); ?></h1>
-                            <div class="text">
-                                <?php the_field('texto') ?>
-                            </div>
-                        </article>
-                    <?php endwhile; ?>
+                        <?php 
+                        while(have_posts()): the_post(); 
+                            if($post->post_type != 'plan'):
+                                $j++;
+                                $active = ($j == 1) ? 'active' : '';
+                        ?>
+                            <article class="white <?php echo $active; ?>" id="<?php echo $post->post_name; ?>">
+                                <h1 class="post-title"><?php the_title(); ?></h1>
+                                <div class="text">
+                                    <?php the_field('texto') ?>
+                                </div>
+                            </article>
+                        <?php 
+                            endif;
+                        endwhile; ?>
                         <a href="#" class="btn" onclick="$('#ctc').submit();return false;">Quero Contratar</a>
                     </div>
                 </div>

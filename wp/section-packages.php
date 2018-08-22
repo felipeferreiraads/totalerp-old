@@ -84,7 +84,7 @@
                     <input name="radio-stacked" value="1" type="hidden">
                     <div class="buttons">
                         <button type="submit" class="buy">Quero contratar</button>
-                        <a href="<?php echo site_url('/pacotes/'.$p->slug);?>">Saiba mais</a>
+                        <a href="<?php echo home_url('/pacotes/'.$p->slug);?>">Saiba mais</a>
                     </div>
                 </form>
             </div>
