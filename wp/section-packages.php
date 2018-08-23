@@ -78,7 +78,7 @@
                         <img src="<?php the_field('imagem_home', 'pacotes_'.$p->term_id);?>" alt="Totalerp">
                     </div>
                 </div>
-                <form id="ctc" action="<?php echo site_url('/carrinho/add');?>" method="post">
+                <form id="ctc" action="<?php echo home_url('/carrinho/add');?>" method="post">
                     <input type="hidden" name="produto" value="<?php echo $p->term_id;?>">
                     <input name="t" value="1" type="hidden">
                     <input name="radio-stacked" value="1" type="hidden">
