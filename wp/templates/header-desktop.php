@@ -64,10 +64,7 @@
                 <?php endforeach ?>
 
                 <div class="tw-flex tw-items-center">
-                    <a href="<?php echo site_url('/carrinho/');?>" class="tw-bg-header tw-flex tw-items-center tw-px-4 tw-py-3 tw-rounded-tl-full  tw-rounded-bl-full ">
-                        <i class="fa tw-text-white tw-text-18 fa-shopping-cart"></i>
-                    </a>
-                    <a href="http://app.totalerp.com.br/" class="tw-bg-blue tw-text-12 tw-flex tw-items-center tw-px-4 tw-py-3 tw-rounded-tr-full  tw-rounded-br-full ">
+                    <a href="http://app.totalerp.com.br/" class="tw-bg-blue tw-text-12 tw-flex tw-items-center tw-px-4 tw-py-3 tw-rounded-full  tw-rounded-br-full ">
                         <img src="<?php echo get_template_directory_uri();?>/img/logo.svg" alt="Entrar" style="height: 18px">
                         <span class="tw-text-white tw-ml-2">ENTRAR</span>
                     </a>
