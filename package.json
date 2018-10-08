@@ -17,7 +17,8 @@
     "serve": "parallelshell \"npm run php\" \"npm run browsersync\"",
     "watch": "parallelshell \"npm run js:watch\" \"npm-watch\"",
     "dev": "parallelshell \"npm run serve\" \"npm run watch\"",
-    "build": "parallelshell \"npm run js:prod\" \"npm run css:prod\" \"npm run img:prod\" && echo \"MANDA BALA NO DEPLOY!\""
+    "build": "parallelshell \"npm run js:prod\" \"npm run css:prod\" \"npm run img:prod\" && echo \"MANDA BALA NO DEPLOY!\"",
+    "postcss": "node ./sprites.js"
   },
   "watch": {
     "css": {
@@ -62,6 +63,8 @@
     "jquery-validation": "^1.16.0",
     "normalize.css": "^4.2.0",
     "owl.carousel": "^2.3.2",
+    "postcss": "^7.0.2",
+    "postcss-sprites": "^4.2.1",
     "shufflejs": "^5.1.2",
     "sweetalert2": "^6.5.6"
   }

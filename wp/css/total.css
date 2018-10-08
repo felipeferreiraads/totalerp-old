@@ -2932,9 +2932,9 @@ footer .contact .container:after {
             border-top-right-radius:0;
         }
         .modulares .row {
-            -webkit-flex-direction: column-reverse; */
+            -webkit-flex-direction: column-reverse;
             -moz-flex-direction: column-reverse;
-            flex-direction: column-reverse; */
+            flex-direction: column-reverse;
         }
         .modulares .title,
         .modulares .text,

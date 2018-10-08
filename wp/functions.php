@@ -92,7 +92,7 @@ function script_enqueue()
 }
 
 if ( ! is_admin()) {
-    add_action("wp_enqueue_scripts", "script_enqueue");
+    add_action("wp_print_scripts", "script_enqueue");
 }
 
 // Google Maps API
