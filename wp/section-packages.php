@@ -36,16 +36,6 @@
                 <div class="grid">
                     <div class="info">
                         <h2><?php echo $p->name; ?></h2>
-                        <div class="package-value">
-                            <div class="left">
-                                <span class="type">Mensal</span>
-                                <span class="value">R$ <i><?php the_field('valor_mensal', 'pacotes_'.$p->term_id); ?></i></span>
-                            </div>
-                            <div class="right">
-                                <span class="type">Fidelidade (10% OFF)*</span>
-                                <span class="value">R$ <i><?php the_field('valor_anual', 'pacotes_'.$p->term_id); ?></i></span>
-                            </div>
-                        </div>
                         <?php
                             echo apply_filters( 'the_content', $p->description );
                             $modules = new WP_Query([
@@ -78,15 +68,10 @@
                         <img src="<?php the_field('imagem_home', 'pacotes_'.$p->term_id);?>" alt="Totalerp">
                     </div>
                 </div>
-                <form id="ctc" action="<?php echo home_url('/carrinho/add');?>" method="post">
-                    <input type="hidden" name="produto" value="<?php echo $p->term_id;?>">
-                    <input name="t" value="1" type="hidden">
-                    <input name="radio-stacked" value="1" type="hidden">
-                    <div class="buttons">
-                        <button type="submit" class="buy">Quero contratar</button>
-                        <a href="<?php echo home_url('/pacotes/'.$p->slug);?>">Saiba mais</a>
-                    </div>
-                </form>
+                <div class="buttons">
+                    <a data-trigger-modal href="javascript://">Quero testar</a>
+                    <a href="<?php echo home_url('/pacotes/'.$p->slug);?>">Saiba mais</a>
+                </div>
             </div>
         </div>
         <?php endforeach; ?>

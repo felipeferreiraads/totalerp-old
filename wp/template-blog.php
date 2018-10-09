@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 /*
 Template Name: Blog List
 */
 
-get_header(); 
+get_header();
 
 
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -23,19 +23,21 @@ $_posts = new WP_query(
 
 	<section class="banners min clouds">
 
-		
+
 	</section>
 
-	
+
 
 
 <div class="blog" id="blog-list">
 
 	<div class="container">
 		<?php if(have_posts()): while (have_posts()): the_post(); ?>
-		
-		<h1 class="post-title"><?php the_title(); ?></h1>
-		<article class="text">                           
+		<div class="grid-search">
+			<h1 class="post-title" style="margin-top: 10px;"><?php the_title(); ?></h1>
+			<?php get_search_form(); ?>
+		</div>
+		<article class="text">
             <?php the_content();?>
         </article>
 		<?php endwhile; endif; ?>
@@ -44,21 +46,21 @@ $_posts = new WP_query(
 
 		<div class="row">
 
-		
-			<?php while($_posts->have_posts()): $_posts->the_post(); 
 
-				$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full', false, '' ); 	
+			<?php while($_posts->have_posts()): $_posts->the_post();
+
+				$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full', false, '' );
 
 			?>
 
 			<div class="col-md-4 col-sm-2">
 
-				<article class="item">	
+				<article class="item">
 
-					<a href="<?php the_permalink(); ?>">		
+					<a href="<?php the_permalink(); ?>">
 
-						<div class="image" 
-						<?php if($thumb) echo 'style="background-image:url('.$thumb[0].')"' ?>></div>   	
+						<div class="image"
+						<?php if($thumb) echo 'style="background-image:url('.$thumb[0].')"' ?>></div>
 
 					  	<div class="box">
 
@@ -69,11 +71,11 @@ $_posts = new WP_query(
 
 					</a>
 
-				</article>	
+				</article>
 
 				</div>
 
-			<?php  endwhile;  ?>	
+			<?php  endwhile;  ?>
 
 		</div>
 
@@ -81,13 +83,13 @@ $_posts = new WP_query(
 
 			<?php wp_pagenavi( array( 'query' => $_posts )); ?>
 
-		</div>			
+		</div>
 
 	</div>
 
 </div>
 
-<?php  else: ?> 
+<?php  else: ?>
 
 <div class="noticias" id="blog-list">
 
@@ -95,7 +97,7 @@ $_posts = new WP_query(
 
 		<div class="row">
 
-			<div class="col-xs-12">	
+			<div class="col-xs-12">
 
 				<p class="title">Não há conteúdo publicado. </p>
 

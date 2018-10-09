@@ -14,7 +14,6 @@ body {
     font-family: 'Roboto', sans-serif;
     display: none;
     color: #666666;
-    font-smoothing: antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     backface-visibility: hidden;
@@ -738,10 +737,6 @@ img.svg-style {
     opacity:1;
 }
 
-.mob .slick-current {
-
-}
-
 .flix-slide.slick-active {
     opacity:1;
 }
@@ -1162,10 +1157,6 @@ img.svg-style {
     width: 100%;
     margin: 80px 0 90px 0;
     display: none;
-}
-
-.app-line {
-    /* margin: 82px 0 45px; */
 }
 
 .line-header {
@@ -1598,10 +1589,6 @@ a.app-button:focus {
 
 .blog .item:hover h3.title {
     color:#00A2DC;
-}
-
-.blog .item:hover h3.title {
-    color:
 }
 
 .blog .box {
@@ -2314,7 +2301,6 @@ div.wpcf7 input[type="file"] {
 }
 
 .contato aside i {
-    display:inline-block;
     float:left;
     font-size: 14px;
     width: 20px;
@@ -2591,10 +2577,6 @@ footer .contact {
     color:#D0D0D2;
     margin-bottom: 5px;
     margin-top: -1px;
-}
-
-.contact strong {
-    /* color:#fff; */
 }
 
 footer .dados {
@@ -3285,4 +3267,11 @@ footer .contact .container:after {
 
 .submenu {
     display: none;
+}
+
+.grid-search {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 30px
 }
