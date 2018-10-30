@@ -1,5 +1,5 @@
-<?php 
-/** 
+<?php
+/**
 
 Template Name: Carrinho
 
@@ -41,14 +41,14 @@ $sessionID =  $hr->post($url, $params, 'array');
 
 if($action == 'add'){
 	$t = $_POST['t'];
-	
+
 	if( $t == 1 ){
 		$term_id 		= $_POST['produto'];
 		$term 			= get_term( $term_id, 'pacotes');
-		$term_id 		= $term->term_id; 
+		$term_id 		= $term->term_id;
 		$produto 		= new stdClass();
 		$produto->nome 	=  $term->name;
-		$valor 			= str_replace(',','.', str_replace('.', '',  get_field('valor_mensal', 'pacotes_'.$term_id) ) ); 
+		$valor 			= str_replace(',','.', str_replace('.', '',  get_field('valor_mensal', 'pacotes_'.$term_id) ) );
 		$valor2 		= str_replace(',','.', str_replace('.', '',   get_field('valor_anual', 'pacotes_'.$term_id)  ) );
 		$qtd			= 1;
 		$type 			= $_POST['radio-stacked'] != ""? $_POST['radio-stacked'] : 1;
@@ -58,7 +58,7 @@ if($action == 'add'){
 		$cart->setType($type);
 		$cart->add($item);
 		wp_redirect('/carrinho');
-		
+
 	}else if ($t == 2 ){
 		$produto_id 		= $_POST['produto'];
 		$post = wp_get_single_post( $produto_id );
@@ -132,6 +132,7 @@ get_header();
 
 
 	<div class="page cart">
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js'></script>s
 	<script>
 	$(function(){
 		var overlay = $('.overlay').overlay();
@@ -139,10 +140,10 @@ get_header();
 			 return $.trim(arg) !== value;
 		}, "Value must not equal arg.");
 
-		
-		
+
+
 		$('#dados-contato').hide();
-		$('#proximo_passo').click(function(){ 
+		$('#proximo_passo').click(function(){
 			PagSeguroDirectPayment.setSessionId('<?php echo $sessionID['id'] ?>');
             var senderHash = PagSeguroDirectPayment.getSenderHash();
             listarFormasDePagamento();
@@ -152,7 +153,7 @@ get_header();
 			            scrollTop: $('#dados-contato').offset().top + 'px'
 			        }, 1000, 'swing');
 			}, 1100);
-		
+
 
 		});
 
@@ -167,16 +168,16 @@ get_header();
 			}else{
 				alert('Escolha uma forma de Pagamento');
 			}
-			
+
 		});
-		
+
 		$('.ptype').click(function(){
 			var k = $(this).data('k');
 			var t = $(this).data('t');
 			var params = new Object();
 			params.k = k;
 			params.t = t;
-			
+
 			$.post('/carrinho/update', params,  function(data){
 
 				if( t == 2 ){
@@ -188,7 +189,7 @@ get_header();
 				}else{
 					$('.t-anual').hide();
 					$('.t-mensal').show();
-					
+
 					$('.c-anual').hide();
 					$('.c-mensal').show();
 				}
@@ -197,20 +198,20 @@ get_header();
 				$('.totals > strong').html( obj.total );
 
 			});
-			
+
 		});
 
 		$('#finalizar_pedido').click(function(){
 
 			$('.md p').html( '' );
-			
+
 			if ($("#form-checkout").valid()) {
 
 				$('.md h2').html('Por favor aguarde');
 				$('.md p').html( 'Aguarde enquanto estamos processando seu pedido' );
 				$('.md button').hide();
 				overlay.trigger('show');
-				
+
 				var params = $('#form-checkout').serialize();
 				$.post( $('#form-checkout').attr('action') , params, function( data ) {
 
@@ -222,24 +223,24 @@ get_header();
 						$('.md p').html( obj.errormsg );
 					}
 					$('.md button').show();
-					
-					
+
+
 				});
-				
+
 			}else{
 				$('.md h2').html('Atenção');
 				$('.md p').html( 'Há erros no formulário. Por favor verifique os campos para prosseguir.' );
 				$('.md button').show();
 				overlay.trigger('show');
 			}
-			
+
 		});
 
-		
+
 		$('#proceder_pagamento').click(function(){
 
 			$('.md p').html( '' );
-			
+
 			if ($("#form-checkout").valid()) {
 				getHashCard();
 			}else{
@@ -248,11 +249,11 @@ get_header();
 				$('.md button').show();
 				overlay.trigger('show');
 			}
-			
+
 		});
 
 
-		
+
 
 		$('#numero_cartao').change(function(){
 			var myLength = $(this).val().length;
@@ -261,9 +262,9 @@ get_header();
 				$('.md button').hide();
 				overlay.trigger('show');
 				getBrand( $(this).val() );
-			} 
+			}
 		});
-		
+
 		$.validator.setDefaults( {
 			submitHandler: function () {
 				//alert( "submitted!" );
@@ -276,13 +277,11 @@ get_header();
 			rules: {
 				cnpj: {
 					required: true,
-					minlength: 14,
-					cnpj: true
+					minlength: 14
 				},
 				cpf: {
 					required: true,
-					minlength: 11,
-					cpf: true
+					minlength: 11
 				},
 				senha: {
 					required: true,
@@ -292,19 +291,17 @@ get_header();
 			messages: {
 				cnpj: {
 					required: "Campo obrigatório",
-					minlength: "Mínimo 3 caracteres",
-					cnpj: "Cnpj Inválido"
+					minlength: "Mínimo 3 caracteres"
 				},
 				cpf: {
 					required: "Campo obrigatório",
-					minlength: "Mínimo 11 caracteres",
-					cpf: "Cpf Inválido"
+					minlength: "Mínimo 11 caracteres"
 				},
 				senha: {
 					required: "Campo obrigatório",
 					minlength: "Mínimo 3 caracteres"
 				}
-				
+
 			},
 			highlight: function ( element, errorClass, validClass ) {
 				$( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
@@ -330,13 +327,13 @@ get_header();
 
 						var nome = obj.usuario.nome
 						var arnome = nome.split(" ");
-						
+
 						$('#nome').val( arnome.shift()  ).attr('readonly', true);
-						$('#sobrenome').val( arnome.join(" ") ).attr('readonly', true); 
+						$('#sobrenome').val( arnome.join(" ") ).attr('readonly', true);
 						$('#cpf_responsavel').val( obj.usuario.cpf ).attr('readonly', true);
 						$('#email_responsavel').val( obj.usuario.email ).attr('readonly', true);
 
-						
+
 					}else{
 						$('#login_msgerr').show();
 						$('#div_dados').hide();
@@ -344,10 +341,10 @@ get_header();
 						overlay.trigger('hide').delay( 1500 );
 					}
 
-					
+
 
 				});
-				
+
 			}else{
 				$('#div_dados').hide();
 				$('#login_msgerr').hide();
@@ -355,20 +352,18 @@ get_header();
 		});
 
 
-		
+
 		$('#form-validar').validate({
 			rules: {
 				cnpj: {
 					required: true,
-					minlength: 14,
-					cnpj: true
+					minlength: 14
 				}
 			},
 			messages: {
 				cnpj: {
 					required: "Campo obrigatório",
-					minlength: "Mínimo 14 caracteres",
-					cnpj: "Cnpj Inválido"
+					minlength: "Mínimo 14 caracteres"
 				}
 			},
 			highlight: function ( element, errorClass, validClass ) {
@@ -389,10 +384,10 @@ get_header();
 				$.post($(this).attr('action'), $(this).serialize() ,  function(data){
 					var obj = JSON.parse(data);
 
-					
+
 					if( !obj.possuiContrato ) {
 
-						
+
 							$('#fdl_msgerr').html('');
 							$('#fdl_msgerr').hide();
 							$('#valida_msgerr').hide();
@@ -400,16 +395,16 @@ get_header();
 							$('#forma_boleto').attr('checked',true);
 							$('#div_boleto').show();
 							$('#forma_cartao').attr('checked',false);
-													
+
 							$('#div_dados').show(1000);
 							setTimeout(function(){
 							      $('html, body').animate({
 								    scrollTop: $('#div_dados').offset().top + 'px'
 								}, 1000, 'swing');
 							}, 1100);
-						
 
-						
+
+
 					}else{
 						$('#valida_msgerr').show();
 						$('#div_dados').hide();
@@ -420,23 +415,22 @@ get_header();
 						$('.md p').html('');
 						$('.md h2').html( 'Total ERP' );
 					},500);
-					
+
 				});
-				
+
 			}else{
 				console.log( 'error ' );
 			}
 		});
-		
 
 
 
-		
+
+
 		$("#form-checkout").validate({
 			rules: {
 				cnpj: {
 					required: true,
-					cnpj: true,
 					minlength: 14
 				},
 				razao_social: {
@@ -452,8 +446,7 @@ get_header();
 					minlength: 3
 				},
 				cpf_responsavel: {
-					required: true,
-					cpf: true
+					required: true
 				},
 				cep: {
 					required: true
@@ -525,8 +518,7 @@ get_header();
 			messages: {
 				cnpj: {
 					required: "Campo obrigatório",
-					minlength: "Mínimo 14 caracteres",
-					cnpj:"Cnpj inválido"
+					minlength: "Mínimo 14 caracteres"
 				},
 				razao_social: {
 					required: "Campo obrigatório",
@@ -540,11 +532,10 @@ get_header();
 					required: "Campo obrigatório",
 					minlength: "Mínimo 3 caracteres"
 				},
-				cpf_responsavel: { 
-					required: 'Campo obrigatório',
-					cpf: 'Cpf inválido'
+				cpf_responsavel: {
+					required: 'Campo obrigatório'
 				},
-				cep: { 
+				cep: {
 					required: 'Campo obrigatório'
 				},
 				numero: {
@@ -584,13 +575,12 @@ get_header();
 					minlength: "Mínimo 3 caracteres"
 				},
 				cpf_cartao : {
-					required: 'Campo obrigatório',
-					cpf: 'Cpf Inválido'
+					required: 'Campo obrigatório'
 				},
 				nascimento_cartao : {
 					required: 'Campo obrigatório',
 					databr : "Data inválida"
-				},				
+				},
 				cvv : {
 					required: 'Campo obrigatório'
 				},
@@ -613,7 +603,7 @@ get_header();
 					maxlength: "Máximo 3 caracteres",
 					minlength: "Mínimo 3 caracteres"
 				},
-				telefone: { 
+				telefone: {
 					required: 'Campo obrigatório'
 				},
 			},
@@ -624,7 +614,7 @@ get_header();
 		        $(element).parents( ".form-group" ).removeClass( "has-error" ).addClass( "has-success" );
 		     }
 		});
-		
+
 
 		$('#nome_cartao').keyup(function(){
 		    this.value = this.value.toUpperCase();
@@ -649,7 +639,7 @@ get_header();
 		$("#numero_cartao").mask("9999999999999999");
 		//$("#validadeAno").mask("9999");
 
-		
+
 
 		if('<?php echo $cart->getType() ?>' == 2){
 			$('.t-anual').show();
@@ -676,32 +666,32 @@ get_header();
 			$.post('/carrinho/cidade', params,  function(data){
 				var obj = jQuery.parseJSON(data);
 				$('#cidade').empty();
-				
-			    $('#cidade').append($('<option/>', { 
+
+			    $('#cidade').append($('<option/>', {
 			        value: '-1',
-			        text : 'Selecione a Cidade' 
+			        text : 'Selecione a Cidade'
 			    }));
-			    
+
 				$.each(obj, function (index, value) {
-				    $('#cidade').append($('<option/>', { 
+				    $('#cidade').append($('<option/>', {
 				        value: index,
-				        text : value 
+				        text : value
 				    }));
 				});
 				overlay.trigger('hide');
 				setTimeout(function(){
 					$('.md p').html('');
 					$('.md h2').html( 'Total ERP' );
-					$('.md button').show();					
+					$('.md button').show();
 				},500);
-				
+
 			});
-				
+
 		});
-		
+
 	});
 
-	
+
 
 	function getUser(cnpj){
 		var params = new Object();
@@ -709,7 +699,7 @@ get_header();
 
 		$('.md p').html( 'Obtendo dados da Empresa' );
 		$('.md button').hide();
-		
+
 		$.post('/pagseguro/getuser', params,  function(data){
 			var obj = jQuery.parseJSON(data);
 
@@ -717,7 +707,7 @@ get_header();
 				$('.md p').html( obj.message );
 				$('#is_cliente').val( 0 );
 			}else{
-				
+
 				$('#div_dados').show();
 				$('#is_cliente').val( 1 );
 				$('#dados_cnpj').val( obj.cnpj ).attr('readonly', true);;
@@ -726,7 +716,7 @@ get_header();
 				$('#email').val( obj.email ).attr('readonly', true);;
 				$('#ddd').val( obj.tel.substring(0, 2) ).attr('readonly', true);;
 				$('#telefone').val( obj.tel.substring(2) ).attr('readonly', true);;
-	
+
 				$('#endereco').val( obj.logradouro ).attr('readonly', true);;
 				$('#numero').val( obj.numero ).attr('readonly', true);;
 				$('#complemento').val( obj.complemento ).attr('readonly', true);;
@@ -741,18 +731,18 @@ get_header();
 				$.post('/carrinho/ibge', params,  function(data){
 					var objIbge = jQuery.parseJSON(data);
 					$('#uf').val( objIbge.uf_id );
-					
+
 					var params2 = new Object();
 					params2.cod = objIbge.uf_id;
 					$.post('/carrinho/cidade', params2,  function(data){
 						var objCity = jQuery.parseJSON(data);
 
 						$('#cidade').empty();
-					    $('#cidade').append($('<option/>', { 
+					    $('#cidade').append($('<option/>', {
 					        value: '-1',
-					        text : 'Selecione a Cidade' 
+					        text : 'Selecione a Cidade'
 					    }));
-					    
+
 						$.each(objCity, function (index, value) {
 							option = new Object();
 							option.value = index;
@@ -763,43 +753,43 @@ get_header();
 						    $('#cidade').append($('<option/>', option));
 						});
 
-						
+
 					});
-					
+
 				});
-					
+
 				//$('#nome').val( obj.respNome ).attr('readonly', true);
 					//$('#cep').val( obj.cep ).attr('readonly', true); SOBRENOME
 				//$('#cpf').val( obj.respCpf ).attr('readonly', true);
 				//$('#email_responsavel').val( obj.respEmail ).attr('readonly', true);
-	
+
 				//$('#cod_representante').val( obj.usuarioCad ).attr('readonly', true);
-	
+
 				$('.md p').html( 'Obtendo dados de Pagamento' );
-				
+
 				$.post('/pagseguro/validar', {'cnpj':cnpj} ,  function(data){
 					var obj = JSON.parse(data);
 					if( obj.hasOwnProperty('error') ){
 						$('.md p').html( obj.message );
-					}else{				
+					}else{
 
 						if( obj.possuiContrato ){
-							
+
 							if( obj.pessoaContrato.fidelidade && $("input[name=radio-stacked-1]:checked").val() == 1 ){
 
 								$('#fdl_msgerr').html('O seu plano atual é com fidelidade, realizar a compra alterando o produto para o Plano com Fidelidade.');
 								$('#fdl_msgerr').show();
 								$('#div_dados').hide();
 								$('#div_boleto').hide();
-								
+
 							}else if( !obj.pessoaContrato.fidelidade && $("input[name=radio-stacked-1]:checked").val() == 2 ){
 								$('#fdl_msgerr').html('O seu plano atual não tem fidelidade, realizar a compra alterando o produto para o Plano Mensal ou entre em contato com o nosso setor Comercial.');
 								$('#fdl_msgerr').show();
 								$('#div_dados').hide();
 								$('#div_boleto').hide();
-								
+
 							}else {
-								
+
 								if( obj.pessoaContrato.formaPagamento == 'BOLETO' ){
 									$('#forma_boleto').attr('checked',true);
 									$('#forma_cartao').parent().parent().hide();
@@ -819,12 +809,12 @@ get_header();
 							}
 
 
-							
+
 						}else{
 							$('#div_cartao').show();
 							$('#div_boleto').show();
 						}
-						
+
 						$('.md p').html( 'Login efetuado com sucesso!' );
 
 						setTimeout(function(){
@@ -832,7 +822,7 @@ get_header();
 							    scrollTop: $('#div_dados').offset().top + 'px'
 							}, 1000, 'swing');
 						}, 100);
-						
+
 						overlay.trigger('hide');
 						setTimeout(function(){
 							$('.md p').html('');
@@ -840,20 +830,20 @@ get_header();
 							$('.md button').show();
 						},500);
 					}
-	
+
 				});
 			}
-			
+
 		});
 	}
-	
+
 	var formasPagamento = [];
 	var bandeiraCartao = '';
 
 	function getBrand(bin){
 		PagSeguroDirectPayment.getBrand({
 			cardBin: bin,
-			success: function(response) { 
+			success: function(response) {
 				var ccName = response.brand.name;
 				ccName = ccName.toUpperCase();
 				bandeiraCartao = ccName;
@@ -864,14 +854,14 @@ get_header();
 				$('.md p').html('Erro no cartão').delay(5000);;
 				overlay.trigger('show');
 			 },
-			complete: function(response) { 
+			complete: function(response) {
 				overlay.trigger('hide');
 				setTimeout(function(){
 					$('.md p').html('');
 					$('.md button').show();
 				},1000);
 			}
-		});		
+		});
 	}
 
 	function processaFormasDePagamento(retorno){
@@ -891,7 +881,7 @@ get_header();
 	function listarFormasDePagamento(){
 		PagSeguroDirectPayment.setSessionId('<?php echo $sessionID['id'] ?>');
 		PagSeguroDirectPayment.getPaymentMethods({
-			amount: <?php echo number_format($cart->getTotal(), 2,'.','')?>, 
+			amount: <?php echo number_format($cart->getTotal(), 2,'.','')?>,
 			success: function(response) {
 				console.log('success');
 				processaFormasDePagamento(response);
@@ -909,20 +899,20 @@ get_header();
 		$('.md p').html( 'Aguarde enquanto estamos processando seu pagamento' );
 		$('.md button').hide();
 		overlay.trigger('show');
-		
+
 		var param = {
 			cardNumber: $("input#numero_cartao").val(),
 			cvv: $("input#cvv").val(),
 			expirationMonth: $("input#validadeMes").val(),
 			expirationYear: $("input#validadeAno").val(),
 			success: function(response) {
-				$('#card_token').val(response.card.token); 
+				$('#card_token').val(response.card.token);
 
 					var params = $('#form-checkout').serialize();
 					var cidade = $("#cidade option:selected").text();;
 					var estado = $("#uf option:selected").text();;
 					params = params + '&cidade_nome='+cidade+'&estado='+estado;
-					
+
 					$.post( $('#form-checkout').attr('action') , params, function( data ) {
 
 						var obj = jQuery.parseJSON(data);
@@ -943,8 +933,8 @@ get_header();
 						overlay.trigger('show');
 						*/
 					});
-						
-					
+
+
 			},
 			error: function(response) {
 				var mensagem = '';
@@ -954,7 +944,7 @@ get_header();
 				$('.md p').html( mensagem );
 				$('.md button').show();
 				overlay.trigger('show');
-				$('#card_token').val(''); 
+				$('#card_token').val('');
 			},
 			complete: function(response) { }
 		};
@@ -962,7 +952,7 @@ get_header();
 		if($("input#bandeira").val() != '') {
 			param.brand = $("input#bandeira").val();
 		}
-				
+
 		PagSeguroDirectPayment.createCardToken(param);
 	}
 
@@ -985,22 +975,22 @@ get_header();
 				}
 
 				var retorno = true;
-				
+
 				if (erro) {
 					//alert(""" + valor + "" não é uma data válida!!!");
 					//campo.focus();
 					//campo.value = "";
 					retorno = false;
 				}
-				
+
 				return this.optional(element) || retorno;
-		
+
 
 	},'Data inválida');
 
 	jQuery.validator.addMethod("cpf", function(value, element) {
 		   value = jQuery.trim(value);
-			
+
 			value = value.replace('.','');
 			value = value.replace('.','');
 			cpf = value.replace('-','');
@@ -1018,18 +1008,18 @@ get_header();
 			c = 11;
 			for (y=0; y<10; y++) b += (a[y] * c--);
 			if ((x = b % 11) < 2) { a[10] = 0; } else { a[10] = 11-x; }
-			
+
 			var retorno = true;
 			if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]) || cpf.match(expReg)) retorno = false;
-			
+
 			return this.optional(element) || retorno;
 
-		}, "Informe um CPF válido."); // Mensagem padrão 
+		}, "Informe um CPF válido."); // Mensagem padrão
 
-		 
+
 		jQuery.validator.addMethod("cnpj", function(cnpj, element) {
 		   cnpj = jQuery.trim(cnpj);
-			
+
 			// DEIXA APENAS OS NÚMEROS
 		   cnpj = cnpj.replace('/','');
 		   cnpj = cnpj.replace('.','');
@@ -1099,7 +1089,7 @@ get_header();
 
 		return false;
 	}
-	
+
 
 	function finaliza_cartao(data){
 		$('.container > .post-title').html('Sua transação foi aprovada');
@@ -1115,13 +1105,13 @@ get_header();
 	}
 
 
-	
+
 				</script>
 				<section class="banners min clouds"></section>
 				<div class="container">
 					<h1 class="post-title">Você está contratando</h1>
-					<article class="text">             
-            
+					<article class="text">
+
 			            <p>Abaixo estão listados os produtos e/ou pacotes que você deseja contratar. Clique no botão “Próximo Passo” para seguir com sua compra.</p>
                         <p> <b>Importante: Se a sua empresa já usa o Totalerp, o novo módulo será cobrado em sua próxima fatura. </b></p>
 			            <a href="http://totalerp.com.br/app-market/" class="btn small">Adicionar módulos complementares</a>
@@ -1139,11 +1129,11 @@ get_header();
 	                                    <span class="custom-control-indicator"></span>
 	                                    <span class="custom-control-description"> Plano Fidelidade</span>
 	                                </label>
-                            	</div> 
+                            	</div>
 			        	<ul>
 			        		<?php if( count( $cart->listar() ) > 0 ): ?>
 			        		<?php foreach ($cart->listar() as $k => $item): if($item): ?>
-			        		<li class="product" data-k=<?= $k ?>>			        			
+			        		<li class="product" data-k=<?= $k ?>>
 			        			<span class="name"><a href="/carrinho/delete/?param=<?= $k?>"><i class="fa fa-close"></i></a>
 			        			<span class="c-mensal"><?php echo $item->getCode()?></span>
 			        			<span class="c-anual"><?php echo $item->getCode2()?></span>
@@ -1151,27 +1141,27 @@ get_header();
 			        			</span>
 			        			<div class="custom-control custom-radio">
                                     <label class="custom-control custom-radio t-mensal">
-	                                    <!-- <input id="radioStacked1" name="radio-stacked-<?= $k?>" data-k=<?= $k ?> data-t=1 type="radio" <?php echo $item->getType() != 2? 'checked=checked' : ''; ?> class="custom-control-input ptype">  
+	                                    <!-- <input id="radioStacked1" name="radio-stacked-<?= $k?>" data-k=<?= $k ?> data-t=1 type="radio" <?php echo $item->getType() != 2? 'checked=checked' : ''; ?> class="custom-control-input ptype">
 	                                    <span class="custom-control-indicator"></span> -->
 	                                    <span class="custom-control-description">R$ <strong><?php echo number_format($item->getPrice(), 2,',','.')?></strong> - Plano Mensal</span>
 	                                </label>
                                     <label class="custom-control custom-radio t-anual">
-	                                    <!--  <input id="radioStacked1" name="radio-stacked-<?= $k?>" data-k=<?= $k ?> data-t=2 type="radio" <?php echo $item->getType() == 2? 'checked=checked' : ''; ?> class="custom-control-input ptype">  
+	                                    <!--  <input id="radioStacked1" name="radio-stacked-<?= $k?>" data-k=<?= $k ?> data-t=2 type="radio" <?php echo $item->getType() == 2? 'checked=checked' : ''; ?> class="custom-control-input ptype">
 	                                    <span class="custom-control-indicator"></span> -->
 	                                    <span class="custom-control-description">R$ <strong><?php echo number_format($item->getPrice2(), 2,',','.')?></strong> - Plano Fidelidade</span>
 	                                </label>
-                            	</div> 
+                            	</div>
 			        		</li>
 			        		<?php endif; endforeach;?>
 			        	<?php else: ?>
 			        		<p> Seu carrinho está vazio </p>
 			        	<?php endif; ?>
-			        		
-			        		
+
+
 			        	</ul>
 			        	<section class="totals">
 			        		Total: R$ <strong> <?php echo number_format($cart->getTotal(), 2,',','.')?></strong>
-			        	</section>			        	
+			        	</section>
 			        	<br />
 			        	<?php if( count( $cart->listar() ) > 0): ?>
 			        	<a href="#dados-contato" id="proximo_passo" class="btn small next-step reverse">Próximo Passo <i class="fa fa-angle-right"></i></a>
@@ -1181,7 +1171,7 @@ get_header();
 			        </section>
 
 			        <section id="dados-contato" class="form contato">
-				        
+
 					        <div class="row">
 
 					        	<div class="col-md-6">
@@ -1192,14 +1182,14 @@ get_header();
 										    <input type="text" name="cnpj" id="cnpj_check" required minlength=3 class="form-control" placeholder="CNPJ">
 										</div>
 										<div>
-											<small style="color: red; font-weight: bold; display:none" id="valida_msgerr">O CNPJ informado já encontra-se cadastrado na nossa base de dados, por favor, utilize o formulário de login ao lado.</small> 
+											<small style="color: red; font-weight: bold; display:none" id="valida_msgerr">O CNPJ informado já encontra-se cadastrado na nossa base de dados, por favor, utilize o formulário de login ao lado.</small>
 										</div>
 										<div class="form-group pull-left">
 						        			<a href="javascript:void(0)" onClick='$("#form-validar").submit();' id="btn_validar" class="btn btn-info" style="width: 200px">Cadastrar <i class="fa fa-angle-right"></i></a>
 						        		</div>
 					        		</form>
 					        	</div>
-					        	
+
 					        	<div class="col-md-6">
 						        	<form action="/pagseguro/validausuario" method="post" id="form-login">
 						        		<h2 class="page-title">Já Sou Cliente</h2>
@@ -1214,7 +1204,7 @@ get_header();
 										    <input type="password" name="senha" id="senha" required minlength=3 class="form-control" placeholder="SENHA">
 										</div>
 										<div>
-											<small style="color: red; font-weight: bold; display:none" id="login_msgerr">O CPNJ informado não existe no nosso sistema ou está inativo. Entre em contato com nosso setor comercial através do telefone (41) 5555.5555</small> 
+											<small style="color: red; font-weight: bold; display:none" id="login_msgerr">O CPNJ informado não existe no nosso sistema ou está inativo. Entre em contato com nosso setor comercial através do telefone (41) 5555.5555</small>
 											<small style="color: red; font-weight: bold; display:none" id="fdl_msgerr"></small>
 										</div>
 										<div class="form-group pull-left">
@@ -1222,33 +1212,33 @@ get_header();
 						        		</div>
 						        	</form>
 					        	</div>
-					        	
+
 					        </div>
-					        	
-				        
+
+
 				        <br />
 				        <form action="/pagseguro/checkout" method="post" id="form-checkout">
 				        <input type="hidden" name="is_cliente" id="is_cliente" value="0">
 				        <div class="row" id="div_dados" style="display:none" >
-				        
+
 			        		<div class="col-md-12">
 				        		<h2 class="page-title">Preencha Seus Dados</h2>
 				        		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quam orci, bibendum congue elementum vel, blandit id tortor. </p>
 				        		<h3>Dados da Empresa</h3>
 			        		</div>
-			        		
+
 			        		<div class="form-group col-md-6 col-xs-12">
 							    <input type="text" name="cnpj" id="dados_cnpj" required minlength=3 class="form-control" placeholder="CNPJ">
 							</div>
-							
+
 			        		<div class="form-group col-md-6 col-xs-12">
 							    <input type="text" name="razao_social" id="razao_social" required minlength=3 class="form-control" placeholder="Razão Social">
 							</div>
-							
+
 			        		<div class="form-group col-md-6 col-xs-12">
 							    <input type="text" name="email" id="email" required minlength=3 class="form-control" placeholder="E-mail">
 							</div>
-							
+
 							<div class="row col-md-6 col-xs-12">
 				        		<div class="form-group col-md-4 col-xs-4">
 								    <input type="text" name="ddd" id="ddd" required minlength=2 class="form-control" placeholder="DDD">
@@ -1257,136 +1247,136 @@ get_header();
 								    <input type="text" name="telefone" id="telefone" required minlength=8 class="form-control" placeholder="Telefone">
 								</div>
 							</div>
-									
+
 			        		<div class="col-md-12">
 				        		<h3>Endereço</h3>
 			        		</div>
-			        		
+
 			        		<div class="form-group col-md-6 col-xs-12">
 							    <input type="text" name="endereco" id="endereco" required minlength=3 class="form-control" placeholder="Endereço">
 							</div>
-							
+
 			        		<div class="form-group col-md-3 col-xs-6">
 							    <input type="text" name="numero" id="numero" required minlength=1 class="form-control" placeholder="Número">
 							</div>
-							
+
 			        		<div class="form-group col-md-3 col-xs-6">
 							    <input type="text" name="complemento" id="complemento"   class="form-control" placeholder="Complemento">
 							</div>
-							
+
 			        		<div class="form-group col-md-3 col-xs-6">
 							    <input type="text" name="bairro" id="bairro" required minlength=3 class="form-control" placeholder="Bairro">
 							</div>
-							
+
 			        		<div class="form-group col-md-3 col-xs-6">
 							    <select name="uf" id="uf" class="form-control" required >
-							    	<option value="-1" > Selecione o Estado </option> 
+							    	<option value="-1" > Selecione o Estado </option>
 							    <?php foreach($ufQuery as $uf):?>
 							    	<option value="<?php echo $uf->id?>"> <?php echo $uf->sigla?></option>
 							    <?php endforeach?>
 							    </select>
 							</div>
-							
+
 			        		<div class="form-group col-md-3 col-xs-6">
 								<select name="cidade" id="cidade" required class="form-control"  >
-								<option value="-1" > Cidade </option> 
+								<option value="-1" > Cidade </option>
 								</select>
 							</div>
-							
+
 			        		<div class="form-group col-md-3 col-xs-6">
 							    <input type="text" name="cep" id="cep" required minlength=8 class="form-control" placeholder="CEP">
 							</div>
-							
-							
+
+
 				        		<div class="col-md-12 dados-resp">
 					        		<h3>Dados do Responsável</h3>
 				        		</div>
-								
+
 				        		<div class="form-group col-md-6 col-xs-12 dados-resp">
 								    <input type="text" name="nome" id="nome" required minlength=3 class="form-control" placeholder="Nome">
 								</div>
-								
+
 				        		<div class="form-group col-md-6 col-xs-12 dados-resp">
 								    <input type="text" name="sobrenome" id="sobrenome" required minlength=3 class="form-control" placeholder="Sobrenome">
 								</div>
-								
+
 				        		<div class="form-group col-md-6 col-xs-12 dados-resp">
 								    <input type="text" name="cpf_responsavel" id="cpf_responsavel" required minlength=11 class="form-control" placeholder="CPF">
 								</div>
-								
+
 				        		<div class="form-group col-md-6 col-xs-12 dados-resp" >
 								    <input type="text" name="email_responsavel" id="email_responsavel" required minlength=3 class="form-control" placeholder="E-mail do Responsável">
 								</div>
-							
-									
+
+
 			        		<div class="col-md-12">
 				        		<h3>Código do Representante</h3>
 			        		</div>
-			        		
+
 			        		<div class="form-group col-md-12 col-xs-12">
 							    <input type="text" name="cod_representante" id="cod_representante"  minlength=11 class="form-control" placeholder="Código do Representante">
 								<small>Se você não tiver um código de representate, deixe este campo em branco.</small>
 							</div>
-							
+
 			        		<div class="col-md-12">
 				        		<h3>Forma de Pagamento</h3>
 			        		</div>
-			        		
+
 			        		<div class="checkbox col-md-12 col-xs-12">
 							    <label><input type="radio" value="B" id="forma_boleto" name="forma_pagamento" class="forma_pagamento" required > Boleto </label>
 							</div>
-							
+
 			        		<div class="checkbox col-md-12 col-xs-12">
 							    <label><input type="radio" value="P" id="forma_cartao" checked=checked name="forma_pagamento" class="forma_pagamento"  required > Cartão de Crédito </label>
 							</div>
-												        		
+
 					    </div>
-					    
+
 					    <div class="row" id="div_cartao" style="display:none">
 				        		<div class="col-md-12">
 					        		<h3>Dados do Cartão de Crédito</h3>
 				        		</div>
-				        		
+
 				        		<div class="form-group col-md-4 col-xs-8">
 								    <input type="text" name="numero_cartao" id="numero_cartao" required minlength=3 class="form-control" placeholder="Número">
 									<input type="hidden" name="bandeira" id="bandeira">
 								    <input type="hidden" name="card_token" id="card_token">
 								</div>
-								
+
 								<div class="col-md-2 col-xs-4">
 										<div id="cardLogo"></div>
 								</div>
-								
+
 				        		<div class="form-group col-md-6 col-xs-12">
 								    <input type="text" name="nome_cartao" id="nome_cartao" required minlength=3 class="form-control" placeholder="Nome Impresso no Cartão">
-								</div>	
-								
+								</div>
+
 								<div class="form-group col-md-2 col-xs-6">
 								    <input type="text" name="cvv" id="cvv" required  class="form-control" placeholder="cvv">
 								</div>
-								
+
 								<div class="form-group col-md-2 col-xs-6">
 								    <input type="text" name="validadeMes" id="validadeMes" required minlength=2  class="form-control" placeholder="Mês de Vencimento">
 								</div>
-								
+
 								<div class="form-group col-md-2 col-xs-6">
 								    <input type="text" name="validadeAno" id="validadeAno" required minlength=4  class="form-control" placeholder="Ano de Vencimento">
 								</div>
-								
+
 								<div class="form-group col-md-6 col-xs-12">
 								    <input type="text" name="cpf_cartao" id="cpf_cartao" required minlength=11 class="form-control" placeholder="CPF do Titular do Cartão">
 								</div>
-								
+
 								<div class="form-group col-md-6 col-xs-12">
 								    <input type="text" name="nascimento_cartao" id="nascimento_cartao" required  class="form-control" placeholder="Data de Nascimento">
 								</div>
-								
+
 								<div class="form-group pull-right col-md-12 col-xs-12">
 									<a href="javascript:void(0)" id="proceder_pagamento" class="btn">Finalizar o Pagamento <i class="fa fa-angle-right"></i></a>
 								</div>
-					        
+
 					    </div>
-					    
+
 						<div class="row" id="div_boleto" style="display:none">
 			        		<?php /*?>
 			        		<div class="col-md-12">
@@ -1403,28 +1393,28 @@ get_header();
 							    </select>
 							</div>
 							<? */ ?>
-							
+
 							<div class="form-group pull-right col-md-12 col-xs-12">
 								<input type="hidden" name="data_vencimento" value="1">
 								<a href="javascript:void(0)" id="finalizar_pedido" class="btn">Finalizar Pedido <i class="fa fa-angle-right"></i></a>
 							</div>
-									
+
 						</div>
-				        
+
 				        </form>
 
 			        </section>
 				</div>
 			</div>
-			
+
 			<div class="overlay">
 			  <div class="md">
 			    <h2>Total ERP</h2>
 			    <p> </p>
 			    <button style="display: none" onclick="overlay.trigger('hide');" class="btn app-button text-center"> Fechar </button>
-			  </div>			
+			  </div>
 			</div>
-			
+
 
 
 <?php get_footer(); ?>

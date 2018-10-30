@@ -11,6 +11,9 @@
 			$search_query[$query_split[0]] = urldecode($query_split[1]);
 		} // foreach
 
+		$search_query['order'] = 'DESC';
+		$search_query['orderby'] = 'ID';
+
 		$search = new WP_Query($search_query); ?>
 
 
@@ -48,11 +51,12 @@
 				<?php if($_GET['post_type'] == 'post'): ?>
 				<section class="blog">
 					<div class="row">
+					<?php while($search->have_posts()): $search->the_post(); ?>
 						<div class="col-md-4 col-sm-2">
 							<article class="item">
 								<a href="<?php the_permalink(); ?>">
 									<div class="image"
-									<?php if($thumb) echo 'style="background-image:url('.$thumb[0].')"' ?>></div>
+									<?php if(has_post_thumbnail()) echo 'style="background-image:url('.get_the_post_thumbnail_url().')"' ?>></div>
 									<div class="box">
 										<h3 class="title"><?php the_title(); ?></h3>
 										<div class="text"><?php the_excerpt(); ?></div>
@@ -60,6 +64,7 @@
 								</a>
 							</article>
 						</div>
+					<?php endwhile; ?>
 					</div>
 				</section>
 
